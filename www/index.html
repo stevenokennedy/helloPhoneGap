@@ -1,42 +1,163 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
+<html lang="en">
+<head>
+	<meta name="generator" content="HTML Tidy for Windows (vers 25 March 2009), see www.w3.org">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    http://www.apache.org/licenses/LICENSE-2.0
+	<title>Bootstrap 101 Template</title><!-- Bootstrap -->
+	<link href="./lib/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="./lib/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="./css/test-page.css">
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
 
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <h2 class="event received">Hello World!!!</h2>
-            </div>
-        </div>
-        <script type="text/javascript" src="phonegap.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
-    </body>
+<body>
+	<div class="panel panel-primary fullscreen-panel">
+		<div class="panel-heading">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-2">
+						<button class="btn btn-primary pull-left" data-bind="visible: !listView(), click: $root.goToSurveyList"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></button>
+					</div>
+					<div class="col-md-8">
+						<h3 class="centered">Surveys</h3>
+					</div>
+					<div class="col-md-2">
+						<button class="btn btn-info pull-right" data-bind="visible: listView">New Survey</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#admin-navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#">Administrative Functions</a>
+					</div>
+					<div class="collapse navbar-collapse" id="admin-navbar-collapse">
+						<button type="button" class="btn btn-default navbar-btn navbar-right">Manage Groups</button>
+						<button type="button" class="btn btn-default navbar-btn navbar-right">Manage Surveys</button>
+					</div>
+				</div>
+			</nav>
+			
+			<div id="cara" class="carousel slide" data-interval="false" data-ride="carousel">				
+				<div class="carousel-inner" role="listbox">
+					<!-- The Main Survey List Screen -->
+					<!--div id="survey-list" class="item active" data-bind="with: listView"-->
+					<div id="survey-list" class="item active">
+						<div class="panel-group" id="survey-group-list" role="tablist" aria-multiselectable="true" data-bind="foreach: surveyGroups">
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" data-bind="attr: { 'id' : 'group-heading-' + groupId }">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#survey-group-list" aria-expanded="false" 
+											data-bind="text: groupName, 
+											attr: 
+											{
+												'href': '#survey-group-' + groupId, 
+												'aria-controls': 'survey-group-' + groupId
+											},
+											css: { collapsed: $index() > 0}"></a>
+									</h4>
+								</div>
+								<div class="panel-collapse collapse" role="tabpanel" data-bind="foreach: surveys, 
+											attr: 
+											{ 
+												'id' : 'survey-group-' + groupId,
+												'aria-labelled-by' :  'group-heading-' + groupId 
+											},
+											css: { 'in' : $index() == 0 }">
+									<div class="panel-body">
+										<div class="container-fluid">
+											<div class="row">
+												<div class="col-md-11">
+													<h4 class="list-group-item-heading" data-bind="text: surveyName"></h4>
+													<p class="list-group-item-text" data-bind="text: surveyDescription"></p>
+												</div>
+												<div class="col-md-1">
+													<button class="btn btn-primary pull-right" data-bind="click: $root.goToSurvey"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+			
+					<!-- The Survey Edit Screen -->
+					<!--div id="survey-edit" class="item" data-bind="with: chosenSurveyId"-->
+					<div id="survey-edit" class="item">
+						<form>
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-9">
+										<div class="form-group">
+											<label for="surveyNameField">Survey Name</label>
+											<input id="surveyNameField" class="form-control" data-bind="value: chosenSurveyData().surveyName" placeholder="Enter Survey Name"></input>
+										</div>
+										<div class="form-group">
+											<label for="surveyDescriptionField">Survey Description</label>
+											<input id="surveyDescriptionField" class="form-control" data-bind="value: chosenSurveyData().surveyDescription" placeholder="Enter Survey Description"></input>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-11">
+										<table class="table">
+											<caption>Survey Questions</caption>
+											<thead>
+												<tr><th class="question-text">Question Text</th><th>Response Type</th><th>Response Values</th></tr>
+											</thead>
+											<tbody data-bind="visible: chosenSurveyData().surveyQuestions().length == 0">
+												<tr><td colspan="3"><div class="no-questions">No Questions Added Yet</span></td></tr>
+											</tbody>
+											<tbody data-bind="foreach: chosenSurveyData().surveyQuestions">
+												<tr>
+													<td><input class="form-control" data-bind="value: questionText" placeholder="Enter Question Text"/></td>
+													<td><input class="form-control" data-bind="value: type" placeholder="Enter Response Type"/></td>
+													<td><input class="form-control" data-bind="value: values" placeholder="Enter Response Values"/></td>
+												</tr>
+											</tbody>
+										</table>
+										<button class="btn btn-info" data-bind="click: addNewQuestion">Add New Row</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="panel-footer">
+			<span>Footer</span>
+		</div>
+	</div>	
+	
+	
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="./lib/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="./lib/js/knockout-3.3.0.js" type="text/javascript"></script>
+	<script src="./lib/js/sammy.min.js" type="text/javascript"></script>
+	<script src="phonegap.js" type="text/javascript"></script>
+	<script src="./scripts/test-page-vm.js" type="text/javascript"></script>
+</body>
 </html>
