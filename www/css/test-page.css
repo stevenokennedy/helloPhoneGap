@@ -1,0 +1,44 @@
+html, body
+{
+	height: 100%;
+}
+
+caption 
+{
+	color: #000;
+	font-weight: bold;
+}
+
+.fullscreen-panel
+{
+	height: 100%;
+	margin-bottom: 0;
+}
+
+.fullscreen-panel .panel-footer
+{
+	position: absolute;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+}
+
+h3.centered 
+{
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.no-questions 
+{
+	font-style: italic;
+	padding: 0.75em 0.5em 0.75em 2em;
+	background: #DDDDDD;
+	border-radius: 0.75em;
+}
+
+.question-text
+{
+	width: 50%;
+}
